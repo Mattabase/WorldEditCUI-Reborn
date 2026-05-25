@@ -1,0 +1,33 @@
+# Gradle
+.gradle/
+build/
+*/build/
+*/*/build/
+out/
+bin/
+
+# IDEs
+.idea/
+*.iml
+*.iws
+*.ipr
+.vscode/
+.settings/
+.classpath
+.project
+
+# Minecraft/Forge/Fabric runtime
+run/
+logs/
+crash-reports/
+*.log
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Ignore all jars except the ones in libs/
+*.jar
+!libs/*.jar
+libs/worldedit-mod-*.jar
+!gradle/wrapper/gradle-wrapper.jar
