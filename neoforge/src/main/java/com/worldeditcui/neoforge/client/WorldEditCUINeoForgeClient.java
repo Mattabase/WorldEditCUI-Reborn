@@ -12,6 +12,7 @@ import net.neoforged.neoforge.client.event.InputEvent;
 import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
+import net.neoforged.neoforge.client.event.ClientChatReceivedEvent;
 import org.enginehub.worldeditcui.protocol.CUIPacketHandler;
 
 @Mod(value = WorldEditCUIReborn.MOD_ID, dist = Dist.CLIENT)
@@ -42,6 +43,18 @@ public class WorldEditCUINeoForgeClient {
     public static class GameEvents {
 
         private static int delayedHelo = 0;
+
+        @SubscribeEvent
+        public static void onSystemChat(ClientChatReceivedEvent.System event) {
+            if (com.worldeditcui.config.Config.get().hideGizmoChatFeedback) {
+                if (System.currentTimeMillis() - com.worldeditcui.gizmo.GizmoManager.lastGizmoActionTime < 100) {
+                    String msg = event.getMessage().getString();
+                    if (msg.startsWith("Region ") || msg.startsWith("Selection ")) {
+                        event.setCanceled(true);
+                    }
+                }
+            }
+        }
 
         @SubscribeEvent
         public static void onRenderLevelStage(RenderLevelStageEvent.AfterTranslucentParticles event) {

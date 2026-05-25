@@ -30,6 +30,7 @@ You can configure the mod in-game via the NeoForge Mods menu or Fabric Mod Menu.
 * `selectionEdgeColor`: ARGB hex color for the selection box edges.
 * `selectionGridColor`: ARGB hex color for the selection box grid.
 * `renderSelectionEdgesThroughTerrain`: Toggles whether the selection box edges and grid render through terrain.
+* `hideGizmoChatFeedback`: Hides the chat spam from WorldEdit when using the gizmos to adjust the selection.
 
 ## Building from Source
 This project uses a multiloader setup.

@@ -4,6 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.worldeditcui.WorldEditCUIReborn;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
+import net.fabricmc.fabric.api.client.message.v1.ClientReceiveMessageEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.rendering.v1.level.LevelRenderEvents;
@@ -35,6 +36,19 @@ public class WorldEditCUIFabricClient implements ClientModInitializer {
         // Clear selection on disconnect
         ClientPlayConnectionEvents.DISCONNECT.register((handler, client) -> {
             WorldEditCUIReborn.onDisconnect();
+        });
+
+        // Intercept chat feedback
+        ClientReceiveMessageEvents.ALLOW_GAME.register((message, overlay) -> {
+            if (com.worldeditcui.config.Config.get().hideGizmoChatFeedback) {
+                if (System.currentTimeMillis() - com.worldeditcui.gizmo.GizmoManager.lastGizmoActionTime < 100) {
+                    String msg = message.getString();
+                    if (msg.startsWith("Region ") || msg.startsWith("Selection ")) {
+                        return false; // Cancel message
+                    }
+                }
+            }
+            return true;
         });
 
         // Tick gizmo hover detection

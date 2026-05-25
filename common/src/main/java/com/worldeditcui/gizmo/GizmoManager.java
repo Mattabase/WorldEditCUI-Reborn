@@ -27,6 +27,8 @@ public class GizmoManager {
     private boolean wasUpDown;
     private boolean wasDownDown;
 
+    public static long lastGizmoActionTime = 0;
+
     public GizmoManager(Selection selection) {
         this.selection = selection;
     }
@@ -142,6 +144,7 @@ public class GizmoManager {
     }
 
     private void applyAdjustment(GizmoHandle handle, int amount) {
+        lastGizmoActionTime = System.currentTimeMillis();
         if (handle.isResize()) {
             String dir = handle.getDirectionName();
             if (amount > 0) {

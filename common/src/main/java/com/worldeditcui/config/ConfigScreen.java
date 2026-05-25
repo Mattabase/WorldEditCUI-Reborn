@@ -52,6 +52,15 @@ public class ConfigScreen extends Screen {
         ).bounds(centerX - 100, y, 200, 20).build());
         y += spacing;
 
+        this.addRenderableWidget(Button.builder(
+                Component.literal("Hide Gizmo Chat: " + config.hideGizmoChatFeedback),
+                btn -> {
+                    config.hideGizmoChatFeedback = !config.hideGizmoChatFeedback;
+                    btn.setMessage(Component.literal("Hide Gizmo Chat: " + config.hideGizmoChatFeedback));
+                }
+        ).bounds(centerX - 100, y, 200, 20).build());
+        y += spacing;
+
         // Colors
         fillColorBox = new EditBox(this.font, centerX + 10, y, 90, 20, Component.literal("Fill Color"));
         fillColorBox.setValue(Integer.toHexString(config.selectionFillColor).toUpperCase());

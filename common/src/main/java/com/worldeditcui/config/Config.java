@@ -20,6 +20,7 @@ public class Config {
         public int selectionEdgeColor = 0xC84488FF;
         public int selectionGridColor = 0x604488FF;
         public boolean renderSelectionEdgesThroughTerrain = true;
+        public boolean hideGizmoChatFeedback = true;
     }
 
     public static void load() {
