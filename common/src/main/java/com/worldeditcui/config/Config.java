@@ -14,8 +14,10 @@ public class Config {
     private static ConfigData instance = new ConfigData();
 
     public static class ConfigData {
-        public boolean invertScrollDirection = false;
-        public boolean invertArrowKeys = false;
+        public boolean invertResizeScrollDirection = false;
+        public boolean invertResizeArrowKeys = false;
+        public boolean invertMoveScrollDirection = false;
+        public boolean invertMoveArrowKeys = false;
         public int selectionFillColor = 0x403366FF;
         public int selectionEdgeColor = 0xC84488FF;
         public int selectionGridColor = 0x604488FF;

@@ -83,7 +83,10 @@ public class GizmoManager {
 
         // Arrow key edge detection (only when focused)
         if (focusedHandle != null) {
-            int arrowMult = com.worldeditcui.config.Config.get().invertArrowKeys ? -1 : 1;
+            boolean invert = focusedHandle.isResize() ? 
+                com.worldeditcui.config.Config.get().invertResizeArrowKeys : 
+                com.worldeditcui.config.Config.get().invertMoveArrowKeys;
+            int arrowMult = invert ? -1 : 1;
             
             boolean upDown = GLFW.glfwGetKey(window, GLFW.GLFW_KEY_UP) == GLFW.GLFW_PRESS;
             if (upDown && !wasUpDown) {
@@ -136,7 +139,12 @@ public class GizmoManager {
     public boolean onScroll(double delta) {
         if (focusedHandle == null || !selection.hasSelection()) return false;
         int amount = delta > 0 ? 1 : -1;
-        if (com.worldeditcui.config.Config.get().invertScrollDirection) {
+        
+        boolean invert = focusedHandle.isResize() ? 
+            com.worldeditcui.config.Config.get().invertResizeScrollDirection : 
+            com.worldeditcui.config.Config.get().invertMoveScrollDirection;
+            
+        if (invert) {
             amount = -amount;
         }
         applyAdjustment(focusedHandle, amount);

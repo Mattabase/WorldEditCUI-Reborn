@@ -19,28 +19,44 @@ public class ConfigScreen extends Screen {
 
     @Override
     protected void init() {
-        int y = 40;
-        int spacing = 24;
+        int y = 30;
+        int spacing = 22;
         int centerX = this.width / 2;
 
         Config.ConfigData config = Config.get();
 
         this.addRenderableWidget(Button.builder(
-                Component.literal("Invert Scroll: " + config.invertScrollDirection),
+                Component.literal("Invert Resize Scroll: " + config.invertResizeScrollDirection),
                 btn -> {
-                    config.invertScrollDirection = !config.invertScrollDirection;
-                    btn.setMessage(Component.literal("Invert Scroll: " + config.invertScrollDirection));
+                    config.invertResizeScrollDirection = !config.invertResizeScrollDirection;
+                    btn.setMessage(Component.literal("Invert Resize Scroll: " + config.invertResizeScrollDirection));
                 }
-        ).bounds(centerX - 100, y, 200, 20).build());
+        ).bounds(centerX - 155, y, 150, 20).build());
+
+        this.addRenderableWidget(Button.builder(
+                Component.literal("Invert Move Scroll: " + config.invertMoveScrollDirection),
+                btn -> {
+                    config.invertMoveScrollDirection = !config.invertMoveScrollDirection;
+                    btn.setMessage(Component.literal("Invert Move Scroll: " + config.invertMoveScrollDirection));
+                }
+        ).bounds(centerX + 5, y, 150, 20).build());
         y += spacing;
 
         this.addRenderableWidget(Button.builder(
-                Component.literal("Invert Arrow Keys: " + config.invertArrowKeys),
+                Component.literal("Invert Resize Arrows: " + config.invertResizeArrowKeys),
                 btn -> {
-                    config.invertArrowKeys = !config.invertArrowKeys;
-                    btn.setMessage(Component.literal("Invert Arrow Keys: " + config.invertArrowKeys));
+                    config.invertResizeArrowKeys = !config.invertResizeArrowKeys;
+                    btn.setMessage(Component.literal("Invert Resize Arrows: " + config.invertResizeArrowKeys));
                 }
-        ).bounds(centerX - 100, y, 200, 20).build());
+        ).bounds(centerX - 155, y, 150, 20).build());
+
+        this.addRenderableWidget(Button.builder(
+                Component.literal("Invert Move Arrows: " + config.invertMoveArrowKeys),
+                btn -> {
+                    config.invertMoveArrowKeys = !config.invertMoveArrowKeys;
+                    btn.setMessage(Component.literal("Invert Move Arrows: " + config.invertMoveArrowKeys));
+                }
+        ).bounds(centerX + 5, y, 150, 20).build());
         y += spacing;
 
         this.addRenderableWidget(Button.builder(
@@ -62,17 +78,17 @@ public class ConfigScreen extends Screen {
         y += spacing;
 
         // Colors
-        fillColorBox = new EditBox(this.font, centerX + 10, y, 90, 20, Component.literal("Fill Color"));
+        fillColorBox = new EditBox(this.font, centerX + 20, y, 90, 20, Component.literal("Fill Color"));
         fillColorBox.setValue(Integer.toHexString(config.selectionFillColor).toUpperCase());
         this.addRenderableWidget(fillColorBox);
         y += spacing;
 
-        edgeColorBox = new EditBox(this.font, centerX + 10, y, 90, 20, Component.literal("Edge Color"));
+        edgeColorBox = new EditBox(this.font, centerX + 20, y, 90, 20, Component.literal("Edge Color"));
         edgeColorBox.setValue(Integer.toHexString(config.selectionEdgeColor).toUpperCase());
         this.addRenderableWidget(edgeColorBox);
         y += spacing;
 
-        gridColorBox = new EditBox(this.font, centerX + 10, y, 90, 20, Component.literal("Grid Color"));
+        gridColorBox = new EditBox(this.font, centerX + 20, y, 90, 20, Component.literal("Grid Color"));
         gridColorBox.setValue(Integer.toHexString(config.selectionGridColor).toUpperCase());
         this.addRenderableWidget(gridColorBox);
         y += spacing;
@@ -85,17 +101,17 @@ public class ConfigScreen extends Screen {
 
     @Override
     public void extractRenderState(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float partialTick) {
-        graphics.centeredText(this.font, this.title, this.width / 2, 15, 0xFFFFFF);
+        graphics.centeredText(this.font, this.title, this.width / 2, 15, 0xFFFFFFFF);
         
-        int y = 40 + 24 * 3;
-        int spacing = 24;
+        int y = 30 + 22 * 4;
+        int spacing = 22;
         int centerX = this.width / 2;
         
-        graphics.text(this.font, "Fill Color (ARGB Hex):", centerX - 100, y + 6, 0xFFFFFF);
+        graphics.text(this.font, "Fill Color (ARGB Hex):", centerX - 120, y + 6, 0xFFFFFFFF);
         y += spacing;
-        graphics.text(this.font, "Edge Color (ARGB Hex):", centerX - 100, y + 6, 0xFFFFFF);
+        graphics.text(this.font, "Edge Color (ARGB Hex):", centerX - 120, y + 6, 0xFFFFFFFF);
         y += spacing;
-        graphics.text(this.font, "Grid Color (ARGB Hex):", centerX - 100, y + 6, 0xFFFFFF);
+        graphics.text(this.font, "Grid Color (ARGB Hex):", centerX - 120, y + 6, 0xFFFFFFFF);
 
         super.extractRenderState(graphics, mouseX, mouseY, partialTick);
     }

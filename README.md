@@ -24,8 +24,10 @@ A modern, multiloader (NeoForge & Fabric) client-side mod that provides visual s
 
 ## Configuration
 You can configure the mod in-game via the NeoForge Mods menu or Fabric Mod Menu. Alternatively, you can edit the `config/worldeditcui.json` file directly:
-* `invertScrollDirection`: Reverses the scroll wheel movement direction.
-* `invertArrowKeys`: Reverses the arrow key movement direction.
+* `invertResizeScrollDirection`: Reverses the scroll wheel movement direction for resizing (expanding/contracting).
+* `invertResizeArrowKeys`: Reverses the arrow key movement direction for resizing.
+* `invertMoveScrollDirection`: Reverses the scroll wheel movement direction for moving the selection (center gizmo).
+* `invertMoveArrowKeys`: Reverses the arrow key movement direction for moving the selection.
 * `selectionFillColor`: ARGB hex color for the selection box fill.
 * `selectionEdgeColor`: ARGB hex color for the selection box edges.
 * `selectionGridColor`: ARGB hex color for the selection box grid.
