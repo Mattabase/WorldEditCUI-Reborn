@@ -11,13 +11,17 @@ import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.client.event.InputEvent;
 import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
 import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import org.enginehub.worldeditcui.protocol.CUIPacketHandler;
 
 @Mod(value = WorldEditCUIReborn.MOD_ID, dist = Dist.CLIENT)
 public class WorldEditCUINeoForgeClient {
 
-    public WorldEditCUINeoForgeClient() {
+    public WorldEditCUINeoForgeClient(net.neoforged.fml.ModContainer container) {
         WorldEditCUIReborn.init();
+
+        container.registerExtensionPoint(IConfigScreenFactory.class,
+                (mc, parent) -> new com.worldeditcui.config.ConfigScreen(parent));
 
         // Register CUI packet handler
         CUIPacketHandler.instance().registerClientboundHandler((packet, ctx) -> {

@@ -12,6 +12,9 @@
     "entrypoints": {
         "client": [
             "com.worldeditcui.fabric.client.WorldEditCUIFabricClient"
+        ],
+        "modmenu": [
+            "com.worldeditcui.fabric.client.ModMenuCompat"
         ]
     },
     "depends": {
